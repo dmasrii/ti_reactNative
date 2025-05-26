@@ -87,7 +87,11 @@ export default class Register extends Component {
                 <TouchableOpacity onPress={() => this.registrarUsuario(this.state.email, this.state.password, this.state.username)}>
                     <Text>Registrarme</Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={()=> {this.props.navigation.navigate("Login")}}>
+                            <Text>Crear Cuenta</Text>
+                        </TouchableOpacity>
                 {this.state.error ? <Text>Credenciales invalidas</Text> : null}
+
             </View>
         )
     }
