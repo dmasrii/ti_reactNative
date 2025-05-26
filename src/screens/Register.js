@@ -15,7 +15,7 @@ export default class Register extends Component {
 
 
     componentDidMount() {
-        auth.onAusthStateChanged((users) => {
+        auth.onAuthStateChanged((users) => {
             if (users) {
                 this.props.navigation.navigate("Tab")
             }
@@ -92,13 +92,15 @@ export default class Register extends Component {
         )
     }
 }
-
 const styles = StyleSheet.create({
-    input: {
-        borderWidth: 2,
-        borderColor: "red"
-    }
-})
+  container: { flex: 1, padding: 20, justifyContent: 'center' },
+  title: { fontSize: 26, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
+  input: { borderWidth: 1, borderColor: '#ccc', padding: 10, marginBottom: 12, borderRadius: 6 },
+  button: { borderWidth: 1, borderColor: 'black', padding: 12, borderRadius: 6, alignItems: 'center', backgroundColor: '#e6f0ff' },
+  buttonText: { color: 'black', fontWeight: 'bold', fontSize: 16 },
+  errorText: { color: 'red', textAlign: 'center', marginTop: 10 }
+});
+
 
 
 
