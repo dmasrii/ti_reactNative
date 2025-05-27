@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Text, View, TextInput, StyleSheet, TouchableOpacity } from "react-native";
+import React, { Component } from 'react';
+import { Text, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { auth } from "../firebase/config"
 
 export default class Register extends Component {
@@ -56,8 +56,8 @@ export default class Register extends Component {
 
     render() {
         return (
-            <View>
-                <Text>Register</Text>
+            <View style={styles.container}>
+                <Text style={styles.title}>Register</Text>
                 <TextInput
                     style={styles.input} //email
                     keyboardType='default'
@@ -84,11 +84,11 @@ export default class Register extends Component {
                 />
 
 
-                <TouchableOpacity onPress={() => this.registrarUsuario(this.state.email, this.state.password, this.state.username)}>
-                    <Text>Registrarme</Text>
+                <TouchableOpacity style={styles.button} onPress={() => this.registrarUsuario(this.state.email, this.state.password, this.state.username)}>
+                    <Text  style={styles.buttonText}>Registrarme</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> {this.props.navigation.navigate("Login")}}>
-                            <Text>Crear Cuenta</Text>
+                <TouchableOpacity style={styles.button} onPress={()=> {this.props.navigation.navigate("Login")}}>
+                            <Text style={styles.buttonText}>Iniciar Sesion</Text>
                         </TouchableOpacity>
                 {this.state.error ? <Text>Credenciales invalidas</Text> : null}
 
@@ -97,14 +97,44 @@ export default class Register extends Component {
     }
 }
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, justifyContent: 'center' },
-  title: { fontSize: 26, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
-  input: { borderWidth: 1, borderColor: '#ccc', padding: 10, marginBottom: 12, borderRadius: 6 },
-  button: { borderWidth: 1, borderColor: 'black', padding: 12, borderRadius: 6, alignItems: 'center', backgroundColor: '#e6f0ff' },
-  buttonText: { color: 'black', fontWeight: 'bold', fontSize: 16 },
-  errorText: { color: 'red', textAlign: 'center', marginTop: 10 }
+  container: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
+    backgroundColor: '#f0f8ff',
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+    color: 'black',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    marginBottom: 12,
+    borderRadius: 6,
+    backgroundColor: 'white',
+  },
+  button: {
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 12,
+    borderRadius: 6,
+    alignItems: 'center',
+    backgroundColor: '#e6f0ff',
+    marginBottom: 10,
+  },
+  buttonText: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: 12,
+  }
 });
-
-
-
-
