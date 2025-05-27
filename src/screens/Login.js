@@ -29,6 +29,10 @@ export default class Login extends Component {
                 this.setState({email:"", password: "", error: false})
                 this.props.navigation.navigate("Tab")
             })
+            .catch((err) =>{ 
+                console.log(err)
+                this.setState({error: true}
+            )})
         }else{
             this.setState({error:true})
         }
