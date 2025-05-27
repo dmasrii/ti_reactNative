@@ -19,9 +19,6 @@ export default function StackNavigation() {
       <Stack.Screen name="Tab" component={BottomTabs} options={{
         headerShown: false
       }} />
-      <Stack.Screen
-        name="NewPost" component={NewPost} options={{ title: 'Crear nuevo post' }} 
-      />
     </Stack.Navigator>
   )
 }
