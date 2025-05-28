@@ -40,11 +40,11 @@ export default class NewPost extends Component {
         onChangeText={text => this.setState({postText: text, exito: false})}
         value= {this.state.postText}
         />
-        <TouchableOpacity style={styles.button} onPress={()=> this.publicarPost()}>
-        <Text style={styles.buttonText}>Publicar Post</Text>
+        <TouchableOpacity style={styles.button} onPress={() => this.publicarPost()}>
+          <Text style={styles.buttonText}>Publicar Post</Text>
         </TouchableOpacity>
-        {this.state.exito ? <Text style={styles.success}>Tu post fue publicado con exito!</Text> : null}
-        {this.state.error ? <Text style={styles.error}>El campo no puede estar vacio</Text>: null}
+        {this.state.exito ? <Text style={styles.success}>Tu post fue publicado con éxito</Text> : null}
+        {this.state.error ? <Text style={styles.errorText}>El campo no puede estar vacío</Text> : null}
       </View>
     )
   }
@@ -53,43 +53,42 @@ export default class NewPost extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f2',
     padding: 20,
     justifyContent: 'center',
+    backgroundColor: '#f0f8ff', 
   },
   input: {
-    backgroundColor: '#fff',
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 15,
-    fontSize: 16,
     borderWidth: 1,
     borderColor: '#ccc',
+    padding: 10,
+    marginBottom: 12,
+    borderRadius: 6,
+    backgroundColor: 'white',
     height: 100,
-    textAlignVertical: 'top'
+    textAlignVertical: 'top',
   },
   button: {
-    backgroundColor: '#007aff',
-    paddingVertical: 12,
-    borderRadius: 8,
-    marginTop: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 12,
+    borderRadius: 6,
     alignItems: 'center',
+    backgroundColor: '#e6f0ff',
+    marginBottom: 10,
   },
   buttonText: {
-    color: '#fff',
+    color: 'black',
+    fontWeight: 'bold',
     fontSize: 16,
-    fontWeight: '600',
   },
   success: {
     color: 'green',
-    marginTop: 15,
     textAlign: 'center',
-    fontSize: 14
+    marginTop: 10,
   },
-  error: {
+  errorText: {
     color: 'red',
-    marginTop: 15,
     textAlign: 'center',
-    fontSize: 14
+    marginTop: 10,
   }
 });
