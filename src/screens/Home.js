@@ -49,7 +49,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#f0f8ff',
     paddingTop: 20,
   },
   title: {

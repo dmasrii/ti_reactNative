@@ -57,13 +57,13 @@ export default class Profile extends Component {
         <View>
           <Post data={item.data} id={item.id}/>
           <TouchableOpacity style={styles.deleteButton} onPress={()=> this.borrarPost(item.id)}>
-            <Text style={styles.deleteText}>Borrar Post</Text>
+            <Text style={styles.buttonText}>Borrar Post</Text>
           </TouchableOpacity>
           </View> }
         /> 
         }
         <TouchableOpacity style={styles.logoutButton} onPress={()=> this.logout()}>
-            <Text style={styles.logoutText}>Cerrar sesion</Text>
+            <Text style={styles.buttonText}>Cerrar sesion</Text>
         </TouchableOpacity>
       </View>
     )
@@ -73,7 +73,7 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#f0f8ff',
     padding: 20,
     paddingTop: 40
   },
@@ -97,26 +97,35 @@ const styles = StyleSheet.create({
   fontSize: 16,
   },
   deleteButton: {
-    backgroundColor: '#ff3b30',
-    padding: 10,
-    margin: 10,
-    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 12,
+    borderRadius: 6,
     alignItems: 'center',
+    backgroundColor: "#ffcccc",
+    marginBottom: 10
   },
   deleteText: {
     color: '#fff',
     fontWeight: '600',
   },
   logoutButton: {
-    backgroundColor: '#007aff',
+    borderWidth: 1,
+    borderColor: 'black',
     padding: 12,
-    borderRadius: 8,
-    marginTop: 30,
+    borderRadius: 6,
     alignItems: 'center',
+    backgroundColor: '#e6f0ff',
+    marginBottom: 10
   },
   logoutText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: '600',
+  },
+  buttonText: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 16,
   }
 });
