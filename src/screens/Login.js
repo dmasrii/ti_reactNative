@@ -23,7 +23,7 @@ export default class Login extends Component {
     }
 
     loginUsuario(email,password){
-        if (email !== "" && password !== "") {
+        if (email !== "" && password !== "" && email.includes('@') && password.length >= 6 ) {
             auth.signInWithEmailAndPassword(email,password)
             .then(() => {
                 this.setState({email:"", password: "", error: false})
