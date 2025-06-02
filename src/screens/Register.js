@@ -44,9 +44,6 @@ export default class Register extends Component {
                             this.props.navigation.navigate('Tab')
                         })
                         .catch(err => console.log("err:", err))
-
-
-                    this.props.navigation.navigate("Tab")
                 })
 
         }
@@ -85,11 +82,11 @@ export default class Register extends Component {
 
 
                 <TouchableOpacity style={styles.button} onPress={() => this.registrarUsuario(this.state.email, this.state.password, this.state.username)}>
-                    <Text  style={styles.buttonText}>Registrarme</Text>
+                    <Text style={styles.buttonText}>Registrarme</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={()=> {this.props.navigation.navigate("Login")}}>
-                            <Text style={styles.buttonText}>Iniciar Sesion</Text>
-                        </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => { this.props.navigation.navigate("Login") }}>
+                    <Text style={styles.buttonText}>Iniciar Sesion</Text>
+                </TouchableOpacity>
                 {this.state.error ? <Text>Credenciales invalidas</Text> : null}
 
             </View>
@@ -97,44 +94,44 @@ export default class Register extends Component {
     }
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-    backgroundColor: '#f0f8ff',
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-    color: 'black',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    marginBottom: 12,
-    borderRadius: 6,
-    backgroundColor: 'white',
-  },
-  button: {
-    borderWidth: 1,
-    borderColor: 'black',
-    padding: 12,
-    borderRadius: 6,
-    alignItems: 'center',
-    backgroundColor: '#e6f0ff',
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  errorText: {
-    color: 'red',
-    textAlign: 'center',
-    marginBottom: 12,
-  }
+    container: {
+        flex: 1,
+        padding: 20,
+        justifyContent: 'center',
+        backgroundColor: '#f0f8ff',
+    },
+    title: {
+        fontSize: 26,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        textAlign: 'center',
+        color: 'black',
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 10,
+        marginBottom: 12,
+        borderRadius: 6,
+        backgroundColor: 'white',
+    },
+    button: {
+        borderWidth: 1,
+        borderColor: 'black',
+        padding: 12,
+        borderRadius: 6,
+        alignItems: 'center',
+        backgroundColor: '#e6f0ff',
+        marginBottom: 10,
+    },
+    buttonText: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+    errorText: {
+        color: 'red',
+        textAlign: 'center',
+        marginBottom: 12,
+    }
 });

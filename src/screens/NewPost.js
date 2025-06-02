@@ -3,42 +3,43 @@ import React, { Component } from 'react'
 import { db, auth } from '../firebase/config'
 
 export default class NewPost extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state= {
-        postText: "",
-        error: false,
-        exito: false
+    this.state = {
+      postText: "",
+      error: false,
+      exito: false
     }
   }
 
-  publicarPost(){
-    if(this.state.postText !== ""){
-        db.collection("posts").add({
+  publicarPost() {
+    if (this.state.postText !== "") {
+      db.collection("posts").add({
         owner: auth.currentUser.email,
         createdAt: Date.now(),
         text: this.state.postText,
         likes: []
-    })
-    .then(()=>{
-        this.setState({ postText: "", exito: true }); //para que se limpie el campo y pueda escribir otro post
-    })
-    .catch(err => {
-        console.log("error al crear post", err)
-    })
-    } else{
-        this.setState({error: true})
+      })
+        .then(() => {
+          this.setState({ postText: "", exito: true }); //para que se limpie el campo y pueda escribir otro post
+          this.props.navigation.navigate('Tab')
+        })
+        .catch(err => {
+          console.log("error al crear post", err)
+        })
+    } else {
+      this.setState({ error: true })
     }
-  } 
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <TextInput style={styles.input}
-        keyboardType='default'
-        placeholder='Escribí tu post'
-        onChangeText={text => this.setState({postText: text, exito: false})}
-        value= {this.state.postText}
+          keyboardType='default'
+          placeholder='Escribí tu post'
+          onChangeText={text => this.setState({ postText: text, exito: false })}
+          value={this.state.postText}
         />
         <TouchableOpacity style={styles.button} onPress={() => this.publicarPost()}>
           <Text style={styles.buttonText}>Publicar Post</Text>
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'center',
-    backgroundColor: '#f0f8ff', 
+    backgroundColor: '#f0f8ff',
   },
   input: {
     borderWidth: 1,
