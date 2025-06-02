@@ -23,22 +23,18 @@ export default class Profile extends Component {
        data: doc.data()
     });
     });
+
+    userPosts.sort((a,b)=> b.data.createdAt - a.data.createdAt);
+
     this.setState({posts: userPosts, loading: false})
     });
   }
 
-  borrarPost(id){
-    db.collection("posts")
-    .doc(id)
-    .delete() //no se si se puede pero no sabia como hacerlo sino
-    .then(()=> console.log("Post borrado"))
-  }
-
   logout(){
     auth.signOut()
-    .then(()=>
-    this.props.navigation.navigate("Login"))
-    .catch(err => console.log(err))
+      .then(()=>
+        this.props.navigation.navigate("Login"))
+      .catch(err => console.log(err))
   }
 
   render() {
@@ -46,22 +42,24 @@ export default class Profile extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>Mi perfil</Text>
         <Text style={styles.email}>{auth.currentUser.email}</Text>
-        {this.state.loading ? 
-        <ActivityIndicator size="large" color="black"/>
-        : this.state.posts.length === 0 ?
-        <Text style={styles.noPosts}>No hay posts</Text> :
-        <FlatList 
-        data= {this.state.posts}
-        keyExtractor={(item)=> item.id.toString()}
-        renderItem = {({item}) =>
-        <View>
-          <Post data={item.data} id={item.id}/>
-          <TouchableOpacity style={styles.deleteButton} onPress={()=> this.borrarPost(item.id)}>
-            <Text style={styles.buttonText}>Borrar Post</Text>
-          </TouchableOpacity>
-          </View> }
-        /> 
+        
+        <View style={styles.contentContainer}>
+          {this.state.loading ? 
+            <ActivityIndicator size="large" color="black"/>
+            : this.state.posts.length === 0 ?
+            <View style={styles.noPostContainer}>
+              <Text style={styles.noPosts}>No hay posteos todavía</Text> 
+            </View>:
+            <FlatList 
+              data= {this.state.posts}
+              keyExtractor={(item)=> item.id.toString()}
+              renderItem = {({item}) =>
+                <Post data={item.data} id={item.id} showDeleteButton={true}/>
+              }
+          /> 
         }
+        </View>
+    
         <TouchableOpacity style={styles.logoutButton} onPress={()=> this.logout()}>
             <Text style={styles.buttonText}>Cerrar sesion</Text>
         </TouchableOpacity>
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f0f8ff',
     padding: 20,
-    paddingTop: 40
+    paddingTop: 40,
   },
   title: {
     fontSize: 28,
@@ -90,24 +88,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: '#777',
   },
-  noPosts: {
-  textAlign: 'center',
-  marginTop: 30,
-  color: '#999',
-  fontSize: 16,
+  contentContainer: {
+    flex: 1, // Empuja el contenido y deja el botón abajo
   },
-  deleteButton: {
-    borderWidth: 1,
-    borderColor: 'black',
-    padding: 12,
-    borderRadius: 6,
+  noPostsContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#ffcccc",
-    marginBottom: 10
   },
-  deleteText: {
-    color: '#fff',
-    fontWeight: '600',
+  noPosts: {
+    textAlign: 'center',
+    color: '#555',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   logoutButton: {
     borderWidth: 1,
@@ -116,12 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     alignItems: 'center',
     backgroundColor: '#e6f0ff',
-    marginBottom: 10
-  },
-  logoutText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
+    marginBottom: 10,
   },
   buttonText: {
     color: 'black',

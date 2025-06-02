@@ -13,7 +13,6 @@ export default class Register extends Component {
         }
     }
 
-
     componentDidMount() {
         auth.onAuthStateChanged((users) => {
             if (users) {
@@ -21,7 +20,6 @@ export default class Register extends Component {
             }
         })
     }
-
 
     registrarUsuario(email, password, username) {
         if ((email !== "" &&
@@ -34,22 +32,24 @@ export default class Register extends Component {
         ) {
             auth.createUserWithEmailAndPassword(email, password)
                 .then(() => {
-
                     db.collection('users').add({//metodo add siempre recibe un objeto literal
                         owner: auth.currentUser.email,
                         createdAt: Date.now(),
                         updatedAt: Date.now(),
                     })
-                        .then(() => {
-                            this.props.navigation.navigate('Tab')
-                        })
-                        .catch(err => console.log("err:", err))
+                    .then(() => {
+                        this.setState({email:"", password: "", username: "", error: false})
+                        this.props.navigation.navigate('Tab')
+                    })
+                    .catch(err => {console.log("err:", err)
+                        this.setState({error: true})
+                    }
+                )
                 })
-
+        } else{
+            this.setState({error:true})
         }
     }
-
-
 
     render() {
         return (
@@ -87,8 +87,7 @@ export default class Register extends Component {
                 <TouchableOpacity style={styles.button} onPress={() => { this.props.navigation.navigate("Login") }}>
                     <Text style={styles.buttonText}>Iniciar Sesion</Text>
                 </TouchableOpacity>
-                {this.state.error ? <Text>Credenciales invalidas</Text> : null}
-
+                {this.state.error ? <Text style={styles.errorText}>Credenciales invalidas</Text> : null}
             </View>
         )
     }
@@ -130,8 +129,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     errorText: {
-        color: 'red',
-        textAlign: 'center',
-        marginBottom: 12,
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: 12,
+    fontWeight: 'bold',
+    fontSize: 16
     }
 });

@@ -18,7 +18,6 @@ export default class Login extends Component {
                 this.props.navigation.navigate("Tab")
             }
         }
-
         )
     }
 
@@ -41,11 +40,6 @@ export default class Login extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Iniciar Sesion</Text>
-        {this.state.error?
-        <Text style={styles.errorText} >Credenciales Invalidas</Text>
-        :
-        null
-        }
         <TextInput
         style={styles.input} //email
         keyboardType='default'
@@ -67,6 +61,8 @@ export default class Login extends Component {
         <TouchableOpacity style={styles.button} onPress={()=> {this.props.navigation.navigate("Register")}}>
             <Text style={styles.buttonText}>Crear Cuenta</Text>
         </TouchableOpacity>
+        {this.state.error? <Text style={styles.errorText} >Credenciales Invalidas</Text> : null
+        }
       </View>
     )
   }
@@ -108,9 +104,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
       },
-      errorText: {
-        color: 'red',
-        textAlign: 'center',
-        marginBottom: 12,
-      }
+    errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: 12,
+    fontWeight: 'bold',
+    fontSize: 16
+    }
 })

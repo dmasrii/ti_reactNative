@@ -22,7 +22,7 @@ export default class NewPost extends Component {
       })
         .then(() => {
           this.setState({ postText: "", exito: true }); //para que se limpie el campo y pueda escribir otro post
-          this.props.navigation.navigate('Tab')
+          this.props.navigation.navigate('Home')
         })
         .catch(err => {
           console.log("error al crear post", err)

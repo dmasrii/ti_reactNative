@@ -1,7 +1,7 @@
 import { Text, View, ActivityIndicator, FlatList, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import Post from '../components/Post'
-import { db } from '../firebase/config'
+import { db, auth } from '../firebase/config'
 
 
 export default class Home extends Component {
@@ -39,7 +39,7 @@ export default class Home extends Component {
         <FlatList
         data = {this.state.posts}
         keyExtractor={item => item.id.toString()}
-        renderItem={({item})=> <Post id={item.id} data={item.data}/>}
+        renderItem={({item})=> <Post id={item.id} data={item.data} showDeleteButton= {item.data.owner === auth.currentUser.email}/>}
         />}
       </View>
     )
